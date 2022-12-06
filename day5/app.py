@@ -1,13 +1,22 @@
 #!/usr/bin/env python3
+"""https://adventofcode.com/2022/day/5"""
+
 
 import re
 from copy import deepcopy
 
+# Setup a list of lists to hold the contents of the stacks
 stacks = [[] for x in range(10)]
-# Format: [{char_check: stack_num}]
-check_stacks = [{1: 0}]
-for x in range(2, 10):
-    check_stacks.append({list(check_stacks[-1].keys())[0] + 4: x - 1})
+
+# Create a mapping of which character to check, and what stack it's part of
+# We'll skip brackets and spaces, which means every 4th character is part of a stack
+# Pre-build this mapping so we can just check those parts of the line
+# Format: [(char_check: stack_num)]
+check_stacks = [(1, 0)]
+for x in range(1, 9):
+    # Character check position: Get the previous character position and add 4
+    # Stack number: iterate
+    check_stacks.append((check_stacks[-1][0] + 4, x))
 
 flag_build_stacks = True
 with open("5.txt", "r") as f:
@@ -19,16 +28,15 @@ with open("5.txt", "r") as f:
             flag_build_stacks = False
             stacks_pt2 = deepcopy(stacks)
 
-        # Read in the stacks
+        # Parse the stacks input (first part of the input)
         if flag_build_stacks:
-            for cs in check_stacks:
-                for check, stack_num in cs.items():
-                    # Ensure we stay inbounds
-                    if check >= len(line) - 1:
-                        break
-                    c = line[check]
-                    if re.match(r"[A-Z]", c):
-                        stacks[stack_num].append(c)
+            for check, stack_num in check_stacks:
+                # Ensure we stay inbounds
+                if check >= len(line) - 1:
+                    break
+                c = line[check]
+                if re.match(r"[A-Z]", c):
+                    stacks[stack_num].append(c)
 
         # Crane logic
         if line.startswith("move"):
@@ -42,9 +50,9 @@ with open("5.txt", "r") as f:
                 crate = stacks[start_stack - 1].pop(0)
                 stacks[end_stack - 1].insert(0, crate)
 
-                # Part 2
+                # Part 2 - create a temporary stack when crates multiple are pulled up simultaneously
                 pt2_crates.append(stacks_pt2[start_stack - 1].pop(0))
-            # Also for Part 2 only
+            # Part 2 - reverse the temporary stack and add it to the stack
             for crate in reversed(pt2_crates):
                 stacks_pt2[end_stack - 1].insert(0, crate)
 

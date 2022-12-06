@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+"""https://adventofcode.com/2022/day/3"""
+
 
 class Elf:
     def __init__(self) -> None:
@@ -25,8 +27,9 @@ def main():
     # Add final elf
     elves.append(elf)
 
+    # Sums of calories sorted largest first
     sums = sorted([e.total_calories for e in elves], reverse=True)
-    # Part 1
+
     print(f"Part 1: {sums[0]}")
     print(f"Part 2: {sum(sums[0:3])}")
 

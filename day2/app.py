@@ -1,6 +1,14 @@
 #!/usr/bin/env python3
+"""https://adventofcode.com/2022/day2"""
 
-def winner(theirs, mine):
+
+def winner(theirs: str, mine: str) -> int:
+    """
+    Determine the point value of a match
+    :param theirs: opponent's choice
+    :param mine: my choice
+    :return: points
+    """
     # Tie
     if theirs == mine:
         return 3
@@ -11,7 +19,13 @@ def winner(theirs, mine):
     return 0
 
 
-def results2shape(theirs, result):
+def results2shape(theirs: str, result: str) -> str:
+    """
+    Determine my choice based on the opponent's choice and the result
+    :param theirs: opponent's choice
+    :param result: outcome
+    :return: my choice
+    """
     if (theirs == "rock" and result == "lose") or (theirs == "paper" and result == "win") or (theirs == "scissors" and result == "tie"):
         return "scissors"
     if (theirs == "rock" and result == "tie") or (theirs == "paper" and result == "lose") or (theirs == "scissors" and result == "win"):
@@ -20,6 +34,7 @@ def results2shape(theirs, result):
         return "paper"
 
 
+# Decode for readability
 shape_translate = {"A": "rock", "B": "paper", "C": "scissors", "X": "rock", "Y": "paper", "Z": "scissors"}
 results_translate = {"X": "lose", "Y": "tie", "Z": "win"}
 shape_pts = {"rock": 1, "paper": 2, "scissors": 3}
