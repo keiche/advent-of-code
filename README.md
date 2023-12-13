@@ -1,3 +1,3 @@
 # Advent of Code
 
-My personal solutions to the [2022](https://adventofcode.com) events.
+My personal solutions to the [advent of code](https://adventofcode.com) events.
