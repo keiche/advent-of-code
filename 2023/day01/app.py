@@ -22,7 +22,7 @@ num_replace = {
 }
 
 
-with open("1.txt", "r") as f:
+with open("input.txt", "r") as f:
     for line in f.readlines():
         line = line.rstrip()
 
