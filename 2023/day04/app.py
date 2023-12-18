@@ -45,8 +45,9 @@ while len(new_cards) > 0:
     # Add to processed cards
     part2_total += 1
 
-    # Collect winnings
-    new_cards.extend(winner_table[c])
+    # Add the number of cards for each matches it has to the queue
+    for i in range(int(c) + 1, int(c) + len(winner_table[c]) + 1):
+        c.append(new_cards)
 
 print(f"Part 1: {part1_total}")
 print(f"Part 2: {part2_total}")
