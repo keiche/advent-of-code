@@ -4,8 +4,6 @@ https://adventofcode.com/2024/day/11
 keiche
 """
 
-from functools import cache
-
 
 def blink(stones: dict[int, int]) -> dict[int, int]:
     """A full blink iteration"""
@@ -19,7 +17,6 @@ def blink(stones: dict[int, int]) -> dict[int, int]:
     return stone_queue
 
 
-@cache
 def stone_blink(num: int) -> list[int]:
     """Process a single digit at a time, so it can be cached"""
     # Blink conditions
