@@ -40,7 +40,7 @@ def build_region_map(grid) -> list[Region]:
             value = grid[y][x]
             if value not in tmp_regions:
                 tmp_regions[value] = []
-            tmp_regions[value].append((x, y))
+            tmp_regions[value].append((y, x))
 
     # Create graphs for each symbol region
     for tr, nodes in tmp_regions.items():
