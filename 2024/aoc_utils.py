@@ -101,15 +101,11 @@ class Grid:
         """
         G = nx.DiGraph()
 
-        up = (-1, 0)
-        down = (1, 0)
-        left = (0, -1)
-        right = (0, 1)
         turn_options = {
-            right: [up, down],
-            left: [up, down],
-            up: [left, right],
-            down: [left, right],
+            self.right: [self.up, self.down],
+            self.left: [self.up, self.down],
+            self.up: [self.left, self.right],
+            self.down: [self.left, self.right],
         }
 
         for y in range(self.height):
