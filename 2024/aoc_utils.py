@@ -132,3 +132,9 @@ class Grid:
                             G.add_edge((y, x, d), (y + ody, x + odx, od), weight=1000)
 
         return G
+
+
+def manhattan_distance(node1: tuple[int, int], node2: tuple[int, int]) -> int:
+    n1y, n1x = node1
+    n2y, n2x = node2
+    return abs(n1x - n2x) + abs(n1y - n2y)
