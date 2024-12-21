@@ -6,13 +6,7 @@ keiche
 
 import networkx as nx
 
-from aoc_utils import Grid
-
-
-def manhattan_distance(node1: tuple[int, int], node2: tuple[int, int]) -> int:
-    n1y, n1x = node1
-    n2y, n2x = node2
-    return abs(n1x - n2x) + abs(n1y - n2y)
+from aoc_utils import Grid, manhattan_distance
 
 
 def find_cheats(path: list[tuple[int, int]], cheat_len: int = 2, min_time_saved: int = 100) -> int:
