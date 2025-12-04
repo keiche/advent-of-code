@@ -13,7 +13,6 @@ def main():
     grid = Grid()
     grid.initialize_file("input.txt")
 
-    # Part 1
     part1_check = True
     while True:
         cells_to_remove = []
