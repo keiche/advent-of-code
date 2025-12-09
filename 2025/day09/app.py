@@ -32,20 +32,6 @@ def get_max_area(red_tiles: list[tuple[int, int]]) -> int:
     return max(areas)
 
 
-def print_grid(red_tiles: list[tuple[int, int]], green_tiles: list[tuple[int, int]]) -> None:
-    max_x = max(tile[0] for tile in red_tiles) + 2
-    max_y = max(tile[1] for tile in red_tiles) + 2
-    grid = [["." for _ in range(max_x + 1)] for _ in range(max_y + 1)]
-    for tile in red_tiles:
-        if grid[tile[1]][tile[0]] == ".":
-            grid[tile[1]][tile[0]] = "#"
-    for tile in green_tiles:
-        if grid[tile[1]][tile[0]] == ".":
-            grid[tile[1]][tile[0]] = "X"
-    for row in grid:
-        print("".join(row))
-
-
 def main():
     part1_total = 0
     part2_total = 0
