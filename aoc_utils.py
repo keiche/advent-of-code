@@ -6,6 +6,7 @@ keiche
 from typing import Union
 
 import networkx as nx
+from functools import cache
 
 
 class Grid:
@@ -147,6 +148,39 @@ class Grid:
             if 0 <= y + dy < self.height and 0 <= x + dx < self.width:
                 values.append(self.grid[y + dy][x + dx])
         return values
+
+
+class DirectedGraph:
+    def __init__(self, filename: str = "input.txt"):
+        self.graph = nx.DiGraph()
+        self._successors = {}
+
+    def parse_file(self, filename: str = "input.txt"):
+        """Assuming each line is 'node: edge1 edge2 ...'"""
+        with open(filename, "r") as f:
+            for line in f:
+                line = line.strip()
+                node, edges = line.split(":")
+                self.graph.add_node(node)
+                for edge in edges.strip().split(" "):
+                    self.graph.add_edge(node, edge)
+        # Pre-compute successors as tuples for caching
+        self._successors = {node: tuple(self.graph.successors(node)) for node in self.graph.nodes()}
+
+    def find_all_paths(self, start: str, end: str) -> list[list[str]]:
+        """Find all simple paths from start to end - not cached"""
+        return list(nx.all_simple_paths(self.graph, start, end))
+
+    @cache
+    def count_paths(self, start: str, end: str) -> int:
+        """Count all simple paths from start to end using memoized DFS"""
+        if start == end:
+            return 1
+        
+        total = 0
+        for neighbor in self._successors.get(start, ()):
+            total += self.count_paths(neighbor, end)
+        return total
 
 
 def manhattan_distance(node1: tuple[int, int], node2: tuple[int, int]) -> int:
